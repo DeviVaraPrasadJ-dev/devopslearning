@@ -71,7 +71,7 @@ embeds quality and security throughout the delivery lifecycle.
 
 ---
 
-# 🐧 Linux 
+# 2. Linux 
 ---
 
 ## Linux Architecture Deep Understanding
@@ -462,7 +462,7 @@ SRE| Debugging
 
 ---
 
-# 2.b. VERSION CONTROL (GIT)
+# 3. VERSION CONTROL (GIT)
 
 ## Concept & Why
 Git is a distributed version control system that captures snapshots of
