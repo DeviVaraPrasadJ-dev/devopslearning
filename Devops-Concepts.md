@@ -10,8 +10,8 @@ security everywhere, observability by default, and simplicity above all.
 
 ## TABLE OF CONTENTS
 1. DevOps Fundamentals & Culture
-2. a. Linux 
-2. b. Version Control (Git)
+2. Linux 
+2. Version Control (Git)
 3. CI/CD Pipelines & Tools
 4. Build Tools & Artifact Management
 5. Containerization (Docker)
