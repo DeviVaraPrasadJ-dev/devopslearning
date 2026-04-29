@@ -182,7 +182,7 @@ jobs:
 - Keep last N successful artifacts in the registry.
 - Implement automatic rollback if health probes fail.
 ```
----
+
 ```
 # 4. BUILD TOOLS & ARTIFACT MANAGEMENT
 
