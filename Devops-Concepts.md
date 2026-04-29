@@ -10,7 +10,8 @@ security everywhere, observability by default, and simplicity above all.
 
 ## TABLE OF CONTENTS
 1. DevOps Fundamentals & Culture
-2. Version Control (Git)
+2.a. Linux 
+2.b. Version Control (Git)
 3. CI/CD Pipelines & Tools
 4. Build Tools & Artifact Management
 5. Containerization (Docker)
@@ -70,7 +71,398 @@ embeds quality and security throughout the delivery lifecycle.
 
 ---
 
-# 2. VERSION CONTROL (GIT)
+# 🐧 Linux 
+---
+
+## Linux Architecture Deep Understanding
+
+Kernel vs User Space
+
+- Kernel:
+  - Core of OS
+  - Handles CPU, Memory, IO, Networking
+- User Space:
+  - Applications (nginx, docker, etc.)
+
+System Call Flow
+
+App → libc → syscall → kernel → hardware
+
+Important Components
+
+- Process Scheduler
+- Memory Manager
+- VFS (Virtual File System)
+- Network Stack
+
+---
+
+## Process Management (VERY IMPORTANT)
+
+Process States
+
+- R → Running
+- S → Sleeping
+- D → Uninterruptible
+- Z → Zombie
+
+Commands
+
+ps aux
+top
+htop
+pidstat
+
+Kill Process
+
+kill -9 <pid>
+pkill nginx
+
+Process Tree
+
+pstree -p
+
+Nice & Priority
+
+nice -n 10 command
+renice -n -5 -p <pid>
+
+---
+
+## Deep CPU & Memory Debugging
+
+CPU Analysis
+
+top
+mpstat -P ALL
+sar -u 1 5
+
+Memory Analysis
+
+free -m
+vmstat 1
+cat /proc/meminfo
+
+OOM Killer Debug
+
+dmesg | grep -i kill
+
+Load Average
+
+- 1 min / 5 min / 15 min
+- Rule: Load > CPU cores → Problem
+
+---
+
+## Disk & Storage Internals
+
+Disk Usage
+
+df -h
+du -sh *
+
+I/O Monitoring
+
+iostat -x 1
+iotop
+
+Mounting
+
+mount /dev/xvdb /data
+
+fstab
+
+/etc/fstab
+
+LVM (IMPORTANT IN CLOUD)
+
+pvcreate
+vgcreate
+lvcreate
+
+---
+
+## Networking Deep Dive
+
+Network Debugging
+
+ss -tulnp
+netstat -tulnp
+
+Connectivity
+
+ping
+traceroute
+mtr
+
+Packet Capture
+
+tcpdump -i eth0 port 80
+
+DNS Debugging
+
+dig google.com
+nslookup google.com
+
+Ports
+
+lsof -i :80
+
+---
+
+## Linux File System Deep Dive
+
+Inodes
+
+df -i
+
+File Permissions
+
+chmod 755 file
+chown user:group file
+
+Special Permissions
+
+- SUID
+- SGID
+- Sticky Bit
+
+File Types
+
+- Regular
+- Directory
+- Block
+- Character
+- Socket
+
+---
+
+## Logs & Debugging (CRITICAL FOR SRE)
+
+Log Locations
+
+- /var/log/syslog
+- /var/log/messages
+- /var/log/nginx/
+
+Real-time Logs
+
+tail -f file.log
+
+Journalctl
+
+journalctl -u nginx
+journalctl -xe
+
+---
+
+## Systemd (Production Critical)
+
+Service Commands
+
+systemctl start nginx
+systemctl stop nginx
+systemctl restart nginx
+systemctl status nginx
+
+Enable at Boot
+
+systemctl enable nginx
+
+Service File Location
+
+/etc/systemd/system/
+
+---
+
+## SSH & Remote Management
+
+SSH Login
+
+ssh user@ip
+
+Key-Based Auth
+
+ssh-keygen
+ssh-copy-id user@ip
+
+SSH Config
+
+/etc/ssh/sshd_config
+
+---
+
+## Security Hardening
+
+Firewall
+
+ufw enable
+iptables -L
+
+Fail2Ban
+
+- Prevent brute force attacks
+
+Disable Root Login
+
+PermitRootLogin no
+
+---
+
+## Performance Troubleshooting (REAL INTERVIEW)
+
+High CPU
+
+top
+ps aux --sort=-%cpu
+
+High Memory
+
+free -m
+slabtop
+
+Disk Issue
+
+iostat
+df -h
+
+Network Issue
+
+ss
+tcpdump
+
+---
+
+## Shell Scripting (MANDATORY)
+
+Basic Script
+
+#!/bin/bash
+echo "Hello DevOps"
+
+Loops
+
+for i in {1..5}; do
+echo $i
+done
+
+Condition
+
+if [ $a -gt 10 ]; then
+echo "Greater"
+fi
+
+---
+
+## Cron Jobs & Automation
+
+Crontab
+
+crontab -e
+
+Format
+
+* * * * * command
+
+---
+
+## Package Management
+
+Ubuntu
+
+apt update
+apt install nginx
+
+RHEL
+
+yum install nginx
+
+---
+
+## Kernel Tuning (ADVANCED SRE)
+
+sysctl
+
+sysctl -a
+
+Example
+
+net.ipv4.ip_forward=1
+
+---
+
+## Containers + Linux Relation
+
+- Namespaces
+- Cgroups
+- OverlayFS
+
+Check
+
+lsns
+
+---
+
+## Observability in Linux
+
+Tools
+
+- top
+- htop
+- vmstat
+- iostat
+- sar
+
+Golden Signals
+
+- CPU
+- Memory
+- Disk
+- Network
+
+---
+
+## Real-World Debug Flow (IMPORTANT)
+
+Case: App Down
+
+1. Check service
+   systemctl status app
+
+2. Check logs
+   journalctl -u app
+
+3. Check port
+   ss -tulnp
+
+4. Check CPU/MEM
+   top
+
+5. Check disk
+   df -h
+
+---
+
+## Must-Know /proc Files
+
+/proc/cpuinfo
+/proc/meminfo
+/proc/<pid>
+
+---
+
+## DevOps + Linux Mapping
+
+DevOps Area| Linux Skill
+CI/CD| Shell scripting
+Docker| Namespaces
+Kubernetes| cgroups
+Cloud| Networking
+SRE| Debugging
+
+---
+
+# 2.b. VERSION CONTROL (GIT)
 
 ## Concept & Why
 Git is a distributed version control system that captures snapshots of
